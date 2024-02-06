@@ -8,6 +8,10 @@ import com.example.contacts.store.repositories.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/api/v1")
 public class ContactController {
@@ -17,8 +21,33 @@ public class ContactController {
 
     @Autowired
     public ContactController(ContactRepository contactRepository, ContactDtoFactory contactDtoFactory) {
+
         this.contactRepository = contactRepository;
         this.contactDtoFactory = contactDtoFactory;
+    }
+
+    @GetMapping("/contacts/all")
+    public List<ContactDto> contactDtoList() {
+
+        List<ContactEntity> contactEntityList = contactRepository.findAll();
+        List<ContactDto> contactDtoList = new ArrayList<>();
+
+        for(ContactEntity contactEntity : contactEntityList) {
+            contactDtoList.add(contactDtoFactory.makeContactDTO(contactEntity));
+        }
+
+        return contactDtoList;
+    }
+
+    @GetMapping("/contacts/{id}")
+    public ContactDto contactDto (@PathVariable("id") int id) {
+
+        Optional<ContactEntity> contactEntity = contactRepository.findById(id);
+
+        if (contactEntity.isEmpty())
+            throw new BadRequestException(String.format("Contact with id:'%d' doesn't exist", id));
+
+        return contactDtoFactory.makeContactDTO(contactEntity.get());
     }
 
     @PostMapping("/contacts/add")

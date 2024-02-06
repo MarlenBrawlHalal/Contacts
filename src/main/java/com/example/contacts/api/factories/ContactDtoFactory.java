@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ContactDtoFactory {
 
-    public ContactDto makeContactDTO(ContactEntity contactEntity) {
+    public ContactDto makeContactDto(ContactEntity contactEntity) {
 
         return ContactDto.builder()
                 .id(contactEntity.getId())

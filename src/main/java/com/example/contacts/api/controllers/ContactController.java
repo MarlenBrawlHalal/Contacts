@@ -7,6 +7,8 @@ import com.example.contacts.api.factories.ContactDtoFactory;
 import com.example.contacts.store.entities.ContactEntity;
 import com.example.contacts.store.repositories.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -97,5 +99,24 @@ public class ContactController {
         contactEntity = contactRepository.save(contactEntity);
 
         return contactDtoFactory.makeContactDto(contactEntity);
+    }
+
+    @DeleteMapping("/contacts/{id}")
+    public ResponseEntity<Void> deleteContact(@PathVariable("id") int id) {
+
+        ContactEntity contactEntity = contactRepository
+                .findById(id)
+                .orElseThrow(() ->
+                        new NotFoundException(
+                                String.format(
+                                        "Contact with id: '%d' doesn't exist",
+                                        id
+                                )
+                        )
+                );
+
+        contactRepository.delete(contactEntity);
+
+        return ResponseEntity.noContent().build();
     }
 }

@@ -23,7 +23,4 @@ public class ContactDto {
 
     @JsonProperty("create_date")
     private Instant createDate;
-
-//    @JsonProperty("update_date")
-//    private Instant updateDate;
 }

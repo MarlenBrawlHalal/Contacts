@@ -26,7 +26,6 @@ public class ContactEntity {
     private String name;
 
     @Builder.Default
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "create_date")
     private Instant createDate = Instant.now();
 }

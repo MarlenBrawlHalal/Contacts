@@ -11,7 +11,6 @@ import org.springframework.web.context.request.WebRequest;
 
 import java.util.Map;
 
-
 @Controller
 public class CustomErrorController implements ErrorController {
 

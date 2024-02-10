@@ -7,12 +7,12 @@ import com.example.contacts.api.factories.ContactDtoFactory;
 import com.example.contacts.store.entities.ContactEntity;
 import com.example.contacts.store.repositories.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -56,6 +56,17 @@ public class ContactController {
                 );
 
         return contactDtoFactory.makeContactDto(contactEntity);
+    }
+
+    @GetMapping("/contacts/search")
+    public List<ContactDto> searchContactByName(@RequestParam("prefix") String prefix) {
+
+        List<ContactEntity> contactEntityList = contactRepository.findByNameStartingWith(prefix);
+
+        return contactEntityList
+                .stream()
+                .map(contactDtoFactory::makeContactDto)
+                .collect(Collectors.toList());
     }
 
     @PostMapping("/contacts/add")

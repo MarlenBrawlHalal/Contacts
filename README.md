@@ -8,6 +8,7 @@ This is a Spring Boot contact service for managing reference data.
 
 ## Dependencies
 
+- Spring Boot
 - Spring Web
 - Spring Data JPA
 - Lombok

@@ -4,7 +4,7 @@ This is a Spring Boot contact service for managing reference data.
 
 - Java 21
 - Maven
-- PostgreSQL 16
+- PostgreSQL-16
 
 ## Dependencies
 

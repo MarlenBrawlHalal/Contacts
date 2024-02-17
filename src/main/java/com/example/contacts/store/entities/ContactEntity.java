@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.List;
 
 @Setter
 @Getter
@@ -16,16 +17,18 @@ public class ContactEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id")
     private int id;
 
-    @Column(name = "bin", unique = true)
     private String bin;
 
-    @Column(name = "name")
     private String name;
 
     @Builder.Default
-    @Column(name = "create_date")
     private Instant createDate = Instant.now();
+
+    @OneToMany(mappedBy = "contact", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<AddressEntity> addresses;
+
+//    @OneToMany(mappedBy = "contact", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<ContactInfoEntity> contactInformations;
 }

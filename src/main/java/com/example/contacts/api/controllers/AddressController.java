@@ -47,7 +47,7 @@ public class AddressController {
         return contact
                 .getAddresses()
                 .stream()
-                .map(addressDtoFactory::makeAddressdto)
+                .map(addressDtoFactory::makeAddressDto)
                 .collect(Collectors.toList());
     }
 
@@ -71,6 +71,6 @@ public class AddressController {
                         .contact(foundContact)
                         .build());
 
-        return addressDtoFactory.makeAddressdto(address);
+        return addressDtoFactory.makeAddressDto(address);
     }
 }

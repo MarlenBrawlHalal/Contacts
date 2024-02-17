@@ -58,7 +58,7 @@ public class ContactController {
     @GetMapping("/contacts/search")
     public List<ContactDto> searchContactByName(@RequestParam("prefix") String prefix) {
 
-        List<ContactEntity> contactEntityList = contactRepository.findByNameStartingWith(prefix);
+        List<ContactEntity> contactEntityList = contactRepository.findByNameStartsWithIgnoreCase(prefix);
 
         return contactEntityList
                 .stream()

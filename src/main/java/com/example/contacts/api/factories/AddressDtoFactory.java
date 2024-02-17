@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class AddressDtoFactory {
 
-    public AddressDto makeAddressdto(AddressEntity addressEntity) {
+    public AddressDto makeAddressDto(AddressEntity addressEntity) {
 
         return AddressDto.builder()
                 .id(addressEntity.getId())

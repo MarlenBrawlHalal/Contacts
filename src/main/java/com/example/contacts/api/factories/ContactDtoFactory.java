@@ -28,7 +28,7 @@ public class ContactDtoFactory {
                         contactEntity
                         .getAddresses()
                         .stream()
-                        .map(addressDtoFactory::makeAddressdto)
+                        .map(addressDtoFactory::makeAddressDto)
                         .collect(Collectors.toList()))
                 .build();
     }

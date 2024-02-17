@@ -5,9 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Stream;
 
 public interface ContactRepository extends JpaRepository<ContactEntity, Integer> {
 
     Optional<ContactEntity> findByBin(String bin);
-    List<ContactEntity> findByNameStartingWith(String name);
+    List<ContactEntity> findByNameStartsWithIgnoreCase(String name);
 }

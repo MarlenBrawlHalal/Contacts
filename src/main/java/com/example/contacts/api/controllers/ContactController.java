@@ -31,14 +31,11 @@ public class ContactController {
     @GetMapping("/contacts/all")
     public List<ContactDto> getContactList() {
 
-        List<ContactEntity> contactEntityList = contactRepository.findAll();
-        List<ContactDto> contactDtoList = new ArrayList<>();
-
-        for(ContactEntity contactEntity : contactEntityList) {
-            contactDtoList.add(contactDtoFactory.makeContactDto(contactEntity));
-        }
-
-        return contactDtoList;
+        return contactRepository
+                .findAll()
+                .stream()
+                .map(contactDtoFactory::makeContactDto)
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/contacts/{id}")

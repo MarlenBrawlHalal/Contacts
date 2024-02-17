@@ -1,9 +1,12 @@
 package com.example.contacts.api.dto;
 
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.util.List;
 
 @Data
 @Builder
@@ -26,6 +29,4 @@ public class AddressDto {
     private String comment;
 
     private boolean primary;
-
-    private ContactDto contact;
 }

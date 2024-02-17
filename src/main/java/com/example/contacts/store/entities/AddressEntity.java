@@ -28,9 +28,9 @@ public class AddressEntity {
 
     private String comment;
 
-    private boolean primary;
+//    @Builder.Default
+//    private boolean primary = false;
 
     @ManyToOne
-    @JoinColumn(name = "contact_id")
-    private ContactEntity contact;
+    ContactEntity contact;
 }

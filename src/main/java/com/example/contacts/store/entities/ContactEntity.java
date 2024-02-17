@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 @Setter
@@ -26,9 +27,8 @@ public class ContactEntity {
     @Builder.Default
     private Instant createDate = Instant.now();
 
-    @OneToMany(mappedBy = "contact", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<AddressEntity> addresses;
-
-//    @OneToMany(mappedBy = "contact", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private List<ContactInfoEntity> contactInformations;
+    @Builder.Default
+    @OneToMany
+    @JoinColumn(name = "contact_id", referencedColumnName = "id")
+    private List<AddressEntity> addresses = new ArrayList<>();
 }

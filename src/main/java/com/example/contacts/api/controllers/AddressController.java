@@ -52,7 +52,7 @@ public class AddressController {
     }
 
     @PostMapping("/contact/{id}/address/add")
-    public AddressDto createAddress(@PathVariable("id") int id, @RequestParam String street, @RequestParam String buildingNumber) {
+    public AddressDto createAddress(@PathVariable("id") int id, @RequestBody AddressEntity address) {
 
         ContactEntity foundContact = contactRepository
                 .findById(id)
@@ -65,12 +65,10 @@ public class AddressController {
                         )
                 );
 
-        AddressEntity address = addressRepository.save(AddressEntity.builder()
-                        .street(street)
-                        .buildingNumber(buildingNumber)
-                        .contact(foundContact)
-                        .build());
+        address.setContact(foundContact);
 
-        return addressDtoFactory.makeAddressDto(address);
+        AddressEntity savedAddress = addressRepository.save(address);
+
+        return addressDtoFactory.makeAddressDto(savedAddress);
     }
 }

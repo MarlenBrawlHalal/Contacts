@@ -22,8 +22,9 @@ public class ContactDto {
 
     private String name;
 
-    @JsonProperty("create_date")
     private Instant createDate;
 
-    List<AddressDto> addresses;
+    private Instant updateDate;
+
+    private List<AddressDto> addresses;
 }

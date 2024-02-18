@@ -28,7 +28,16 @@ public class ContactEntity {
     private Instant createDate = Instant.now();
 
     @Builder.Default
+    private Instant updateDate = Instant.now();
+
+
+    @Builder.Default
     @OneToMany
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
     private List<AddressEntity> addresses = new ArrayList<>();
+
+    @Builder.Default
+    @OneToMany
+    @JoinColumn(name = "contact_id", referencedColumnName = "id")
+    private List<ContactInfoEntity> contactInformation = new ArrayList<>();
 }

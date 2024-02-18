@@ -24,6 +24,7 @@ public class ContactDtoFactory {
                 .bin(contactEntity.getBin())
                 .name(contactEntity.getName())
                 .createDate(contactEntity.getCreateDate())
+                .updateDate(contactEntity.getUpdateDate())
                 .addresses(
                         contactEntity
                         .getAddresses()

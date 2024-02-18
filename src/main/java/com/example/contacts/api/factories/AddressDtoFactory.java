@@ -18,7 +18,7 @@ public class AddressDtoFactory {
                 .buildingNumber(addressEntity.getBuildingNumber())
                 .office(addressEntity.getOffice())
                 .comment(addressEntity.getComment())
-//                .primary(addressEntity.isPrimary())
+                .primary(addressEntity.isPrimary())
                 .build();
     }
 }

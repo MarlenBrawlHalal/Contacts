@@ -1,5 +1,6 @@
 package com.example.contacts.store.entities;
 
+
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -9,28 +10,20 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "address")
-public class AddressEntity {
+@Table(name = "phone")
+public class PhoneEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
-    private float longitude;
-
-    private float latitude;
-
-    private String street;
-
-    private String buildingNumber;
-
-    private String office;
-
-    private String comment;
+    private String phoneNumber;
 
     @Column(name = "\"primary\"")
     private boolean primary;
 
+    private String comment;
+
     @ManyToOne
-    ContactEntity contact;
+    private ContactInfoEntity contactInformation;
 }

@@ -19,8 +19,9 @@ import java.util.stream.Collectors;
 public class AddressController {
 
     private final AddressRepository addressRepository;
-    private final AddressDtoFactory addressDtoFactory;
     private final ContactRepository contactRepository;
+
+    private final AddressDtoFactory addressDtoFactory;
 
     @Autowired
     public AddressController(AddressRepository addressRepository, AddressDtoFactory addressDtoFactory, ContactRepository contactRepository) {
@@ -52,7 +53,7 @@ public class AddressController {
     }
 
     @PostMapping("/contact/{contact_id}/address/add")
-    public AddressDto createAddress(@PathVariable("contact_id") int id, @RequestBody AddressEntity address) {
+    public AddressDto createAddress(@PathVariable("contact_id") int id, @RequestBody AddressEntity addressEntity) {
 
         ContactEntity foundContact = contactRepository
                 .findById(id)
@@ -65,10 +66,10 @@ public class AddressController {
                         )
                 );
 
-        address.setContact(foundContact);
+        addressEntity.setContact(foundContact);
 
-        AddressEntity savedAddress = addressRepository.save(address);
+        addressEntity = addressRepository.save(addressEntity);
 
-        return addressDtoFactory.makeAddressDto(savedAddress);
+        return addressDtoFactory.makeAddressDto(addressEntity);
     }
 }

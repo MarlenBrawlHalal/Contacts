@@ -45,8 +45,8 @@ public class ContactInfoController {
 
         contactInfoEntity.setContact(foundContact);
 
-        ContactInfoEntity savedContactInfo = contactInfoRepository.save(contactInfoEntity);
+        contactInfoEntity = contactInfoRepository.save(contactInfoEntity);
 
-        return contactInfoDtoFactory.makeContactInfoDto(savedContactInfo);
+        return contactInfoDtoFactory.makeContactInfoDto(contactInfoEntity);
     }
 }

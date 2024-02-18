@@ -3,7 +3,6 @@ package com.example.contacts.store.entities;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 

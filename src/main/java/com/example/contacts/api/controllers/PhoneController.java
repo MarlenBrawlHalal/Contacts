@@ -30,7 +30,7 @@ public class PhoneController {
     @PostMapping("/contact/{contact_id}/contactInfo/{contactInfo_id}/add")
     private PhoneDto createPhone(@PathVariable("contact_id") int contact_id,
                                  @PathVariable("contactInfo_id") int contactInfo_id,
-                                 @RequestBody PhoneEntity phone) {
+                                 @RequestBody PhoneEntity phoneEntity) {
 
         ContactEntity foundContact = contactRepository
                 .findById(contact_id)
@@ -57,10 +57,10 @@ public class PhoneController {
                                 )
                         );
 
-        phone.setContactInformation(foundContactInfo);
+        phoneEntity.setContactInformation(foundContactInfo);
 
-        PhoneEntity savedPhone = phoneRepository.save(phone);
+        phoneEntity = phoneRepository.save(phoneEntity);
 
-        return phoneDtoFactory.makePhoneDto(savedPhone);
+        return phoneDtoFactory.makePhoneDto(phoneEntity);
     }
 }

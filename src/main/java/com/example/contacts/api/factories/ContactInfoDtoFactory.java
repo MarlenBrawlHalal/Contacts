@@ -2,7 +2,6 @@ package com.example.contacts.api.factories;
 
 import com.example.contacts.api.dto.ContactInfoDto;
 import com.example.contacts.store.entities.ContactInfoEntity;
-import com.example.contacts.store.entities.PhoneEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 

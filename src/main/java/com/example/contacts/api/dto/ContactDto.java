@@ -27,4 +27,6 @@ public class ContactDto {
     private Instant updateDate;
 
     private List<AddressDto> addresses;
+
+    private List<ContactInfoDto> contactInformation;
 }

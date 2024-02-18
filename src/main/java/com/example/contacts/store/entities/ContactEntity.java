@@ -30,7 +30,6 @@ public class ContactEntity {
     @Builder.Default
     private Instant updateDate = Instant.now();
 
-
     @Builder.Default
     @OneToMany
     @JoinColumn(name = "contact_id", referencedColumnName = "id")

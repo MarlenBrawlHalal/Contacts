@@ -11,10 +11,12 @@ import java.util.stream.Collectors;
 public class ContactDtoFactory {
 
     private final AddressDtoFactory addressDtoFactory;
+    private final ContactInfoDtoFactory contactInfoDtoFactory;
 
     @Autowired
-    public ContactDtoFactory(AddressDtoFactory addressDtoFactory) {
+    public ContactDtoFactory(AddressDtoFactory addressDtoFactory, ContactInfoDtoFactory contactInfoDtoFactory) {
         this.addressDtoFactory = addressDtoFactory;
+        this.contactInfoDtoFactory = contactInfoDtoFactory;
     }
 
     public ContactDto makeContactDto(ContactEntity contactEntity) {
@@ -27,10 +29,18 @@ public class ContactDtoFactory {
                 .updateDate(contactEntity.getUpdateDate())
                 .addresses(
                         contactEntity
-                        .getAddresses()
-                        .stream()
-                        .map(addressDtoFactory::makeAddressDto)
-                        .collect(Collectors.toList()))
+                            .getAddresses()
+                            .stream()
+                            .map(addressDtoFactory::makeAddressDto)
+                            .collect(Collectors.toList())
+                )
+                .contactInformation(
+                        contactEntity
+                                .getContactInformation()
+                                .stream()
+                                .map(contactInfoDtoFactory::makeContactInfoDto)
+                                .collect(Collectors.toList())
+                )
                 .build();
     }
 }

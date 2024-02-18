@@ -30,8 +30,8 @@ public class AddressController {
         this.contactRepository = contactRepository;
     }
 
-    @GetMapping("/contact/{id}/address/all")
-    public List<AddressDto> getAddressList(@PathVariable("id") int id) {
+    @GetMapping("/contact/{contact_id}/address/all")
+    public List<AddressDto> getAddressList(@PathVariable("contact_id") int id) {
 
         ContactEntity contact = contactRepository
                 .findById(id)
@@ -51,8 +51,8 @@ public class AddressController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/contact/{id}/address/add")
-    public AddressDto createAddress(@PathVariable("id") int id, @RequestBody AddressEntity address) {
+    @PostMapping("/contact/{contact_id}/address/add")
+    public AddressDto createAddress(@PathVariable("contact_id") int id, @RequestBody AddressEntity address) {
 
         ContactEntity foundContact = contactRepository
                 .findById(id)

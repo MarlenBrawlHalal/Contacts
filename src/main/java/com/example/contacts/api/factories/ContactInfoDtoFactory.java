@@ -21,6 +21,7 @@ public class ContactInfoDtoFactory {
     public ContactInfoDto makeContactInfoDto(ContactInfoEntity contactInfoEntity) {
 
         return ContactInfoDto.builder()
+                .id(contactInfoEntity.getId())
                 .email(contactInfoEntity.getEmail())
                 .phones(
                         contactInfoEntity

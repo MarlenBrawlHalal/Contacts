@@ -28,7 +28,7 @@ public class ContactController {
         this.contactDtoFactory = contactDtoFactory;
     }
 
-    @GetMapping("/contacts/all")
+    @GetMapping("/contact/all")
     public List<ContactDto> getContactList() {
 
         return contactRepository
@@ -38,8 +38,8 @@ public class ContactController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/contacts/{id}")
-    public ContactDto getContact(@PathVariable("id") int id) {
+    @GetMapping("/contact/{contact_id}")
+    public ContactDto getContact(@PathVariable("contact_id") int id) {
 
         ContactEntity contactEntity = contactRepository
                 .findById(id)
@@ -55,7 +55,7 @@ public class ContactController {
         return contactDtoFactory.makeContactDto(contactEntity);
     }
 
-    @GetMapping("/contacts/search")
+    @GetMapping("/contact/search")
     public List<ContactDto> searchContactByName(@RequestParam("prefix") String prefix) {
 
         List<ContactEntity> contactEntityList = contactRepository.findByNameStartsWithIgnoreCase(prefix);
@@ -66,7 +66,7 @@ public class ContactController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/contacts/add")
+    @PostMapping("/contact/add")
     public ContactDto createContact(@RequestParam String bin, @RequestParam String name) {
 
         contactRepository.findByBin(bin)
@@ -84,8 +84,8 @@ public class ContactController {
         return contactDtoFactory.makeContactDto(savedContact);
     }
 
-    @PatchMapping("/contacts/{id}")
-    public ContactDto updateContact(@PathVariable("id") int id, @RequestParam String name) {
+    @PatchMapping("/contact/{contact_id}")
+    public ContactDto updateContact(@PathVariable("contact_id") int id, @RequestParam String name) {
 
         if (name.trim().isEmpty()) {
             throw new BadRequestException("An empty name is prohibited");
@@ -109,7 +109,7 @@ public class ContactController {
         return contactDtoFactory.makeContactDto(contactEntity);
     }
 
-    @DeleteMapping("/contacts/{id}")
+    @DeleteMapping("/contact/{contact_id}")
     public ResponseEntity<Void> deleteContact(@PathVariable("id") int id) {
 
         ContactEntity contactEntity = contactRepository

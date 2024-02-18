@@ -4,11 +4,8 @@ import com.example.contacts.store.entities.ContactEntity;
 import com.example.contacts.store.entities.ContactInfoEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
 import java.util.Optional;
 
-public interface ContactRepository extends JpaRepository<ContactEntity, Integer> {
+public interface ContactInfoRepository extends JpaRepository<ContactInfoEntity, Integer> {
 
-    Optional<ContactEntity> findByBin(String bin);
-    List<ContactEntity> findByNameStartsWithIgnoreCase(String name);
 }

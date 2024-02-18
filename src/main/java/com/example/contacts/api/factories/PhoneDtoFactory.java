@@ -10,6 +10,7 @@ public class PhoneDtoFactory {
     public PhoneDto makePhoneDto(PhoneEntity phoneEntity){
 
         return PhoneDto.builder()
+                .id(phoneEntity.getId())
                 .phoneNumber(phoneEntity.getPhoneNumber())
                 .comment(phoneEntity.getComment())
                 .primary(phoneEntity.isPrimary())

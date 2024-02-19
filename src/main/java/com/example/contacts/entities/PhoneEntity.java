@@ -1,4 +1,4 @@
-package com.example.contacts.store.entities;
+package com.example.contacts.entities;
 
 
 import jakarta.persistence.*;

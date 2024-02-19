@@ -1,4 +1,4 @@
-package com.example.contacts.api.exceptions;
+package com.example.contacts.exceptions;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;

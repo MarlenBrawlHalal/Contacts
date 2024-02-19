@@ -1,13 +1,12 @@
-package com.example.contacts.api.dto;
+package com.example.contacts.dto;
 
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Data
@@ -22,9 +21,9 @@ public class ContactDto {
 
     private String name;
 
-    private Instant createDate;
+    private LocalDateTime createDate;
 
-    private Instant updateDate;
+    private LocalDateTime updateDate;
 
     private List<AddressDto> addresses;
 

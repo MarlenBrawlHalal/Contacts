@@ -1,9 +1,9 @@
-package com.example.contacts.store.entities;
+package com.example.contacts.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.time.Instant;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,10 +25,10 @@ public class ContactEntity {
     private String name;
 
     @Builder.Default
-    private Instant createDate = Instant.now();
+    private LocalDateTime createDate = LocalDateTime.now();
 
     @Builder.Default
-    private Instant updateDate = Instant.now();
+    private LocalDateTime updateDate = LocalDateTime.now();
 
     @Builder.Default
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)

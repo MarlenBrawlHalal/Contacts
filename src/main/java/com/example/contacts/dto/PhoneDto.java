@@ -1,4 +1,4 @@
-package com.example.contacts.api.dto;
+package com.example.contacts.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

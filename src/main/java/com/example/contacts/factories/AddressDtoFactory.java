@@ -1,7 +1,7 @@
-package com.example.contacts.api.factories;
+package com.example.contacts.factories;
 
-import com.example.contacts.api.dto.AddressDto;
-import com.example.contacts.store.entities.AddressEntity;
+import com.example.contacts.dto.AddressDto;
+import com.example.contacts.entities.AddressEntity;
 import org.springframework.stereotype.Component;
 
 @Component

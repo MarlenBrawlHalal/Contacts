@@ -1,6 +1,6 @@
-package com.example.contacts.store.repositories;
+package com.example.contacts.repositories;
 
-import com.example.contacts.store.entities.ContactEntity;
+import com.example.contacts.entities.ContactEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

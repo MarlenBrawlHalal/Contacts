@@ -1,40 +1,34 @@
-package com.example.contacts.api.controllers;
+package com.example.contacts.services;
 
-import com.example.contacts.api.dto.ContactDto;
-import com.example.contacts.api.exceptions.BadRequestException;
-import com.example.contacts.api.exceptions.NotFoundException;
-import com.example.contacts.api.factories.ContactDtoFactory;
-import com.example.contacts.store.entities.AddressEntity;
-import com.example.contacts.store.entities.ContactEntity;
-import com.example.contacts.store.entities.ContactInfoEntity;
-import com.example.contacts.store.entities.PhoneEntity;
-import com.example.contacts.store.repositories.AddressRepository;
-import com.example.contacts.store.repositories.ContactInfoRepository;
-import com.example.contacts.store.repositories.ContactRepository;
-import com.example.contacts.store.repositories.PhoneRepository;
+import com.example.contacts.dto.ContactDto;
+import com.example.contacts.exceptions.BadRequestException;
+import com.example.contacts.exceptions.NotFoundException;
+import com.example.contacts.factories.ContactDtoFactory;
+import com.example.contacts.entities.ContactEntity;
+import com.example.contacts.repositories.ContactRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-@RestController
-@RequestMapping("/api/v1")
-public class ContactController {
+@Service
+public class ContactService {
 
     private final ContactRepository contactRepository;
 
     private final ContactDtoFactory contactDtoFactory;
 
     @Autowired
-    public ContactController(ContactRepository contactRepository, ContactDtoFactory contactDtoFactory) {
+    public ContactService(ContactRepository contactRepository, ContactDtoFactory contactDtoFactory) {
+
         this.contactRepository = contactRepository;
         this.contactDtoFactory = contactDtoFactory;
     }
 
-    @GetMapping("/contact/all")
-    public List<ContactDto> getContactList() {
+    public List<ContactDto> getAllContact() {
 
         return contactRepository
                 .findAll()
@@ -43,16 +37,15 @@ public class ContactController {
                 .collect(Collectors.toList());
     }
 
-    @GetMapping("/contact/{contact_id}")
-    public ContactDto getContact(@PathVariable("contact_id") int id) {
+    public ContactDto getContact(int contact_id) {
 
         ContactEntity contactEntity = contactRepository
-                .findById(id)
+                .findById(contact_id)
                 .orElseThrow(() ->
                         new NotFoundException(
                                 String.format(
                                         "Contact with id:'%d' doesn't exist",
-                                        id
+                                        contact_id
                                 )
                         )
                 );
@@ -60,8 +53,7 @@ public class ContactController {
         return contactDtoFactory.makeContactDto(contactEntity);
     }
 
-    @GetMapping("/contact/search")
-    public List<ContactDto> searchContactByName(@RequestParam("prefix") String prefix) {
+    public List<ContactDto> searchContactByName(String prefix) {
 
         List<ContactEntity> contactEntityList = contactRepository.findByNameStartsWithIgnoreCase(prefix);
 
@@ -71,8 +63,7 @@ public class ContactController {
                 .collect(Collectors.toList());
     }
 
-    @PostMapping("/contact/add")
-    public ContactDto createContact(@RequestBody ContactEntity contactEntity) {
+    public ContactDto createContact(ContactEntity contactEntity) {
 
         String bin = contactEntity.getBin();
         contactRepository.findByBin(bin)
@@ -85,8 +76,7 @@ public class ContactController {
         return contactDtoFactory.makeContactDto(contactEntity);
     }
 
-    @PatchMapping("/contact/{contact_id}")
-    public ContactDto updateContact(@PathVariable("contact_id") int contact_id, @RequestParam String name) {
+    public ContactDto updateContactByName(int contact_id, String name) {
 
         if (name.trim().isEmpty()) {
             throw new BadRequestException("An empty name is prohibited");
@@ -110,7 +100,6 @@ public class ContactController {
         return contactDtoFactory.makeContactDto(contactEntity);
     }
 
-    @DeleteMapping("/contact/{contact_id}")
     public ResponseEntity<Void> deleteContact(@PathVariable("contact_id") int contact_id) {
 
         ContactEntity contactEntity = contactRepository

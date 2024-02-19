@@ -1,7 +1,7 @@
-package com.example.contacts.api.factories;
+package com.example.contacts.factories;
 
-import com.example.contacts.api.dto.ContactDto;
-import com.example.contacts.store.entities.ContactEntity;
+import com.example.contacts.dto.ContactDto;
+import com.example.contacts.entities.ContactEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +15,7 @@ public class ContactDtoFactory {
 
     @Autowired
     public ContactDtoFactory(AddressDtoFactory addressDtoFactory, ContactInfoDtoFactory contactInfoDtoFactory) {
+
         this.addressDtoFactory = addressDtoFactory;
         this.contactInfoDtoFactory = contactInfoDtoFactory;
     }

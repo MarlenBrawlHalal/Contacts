@@ -1,4 +1,4 @@
-package com.example.contacts.api.exceptions;
+package com.example.contacts.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

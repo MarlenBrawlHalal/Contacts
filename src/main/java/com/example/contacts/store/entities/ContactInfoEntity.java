@@ -25,7 +25,7 @@ public class ContactInfoEntity {
     ContactEntity contact;
 
     @Builder.Default
-    @OneToMany
-    @JoinColumn(name = "contact_information_id", referencedColumnName = "id")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "contact_info_id", referencedColumnName = "id")
     private List<PhoneEntity> phones = new ArrayList<>();
 }

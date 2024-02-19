@@ -28,5 +28,5 @@ public class ContactDto {
 
     private List<AddressDto> addresses;
 
-    private List<ContactInfoDto> contactInformation;
+    private List<ContactInfoDto> contactInfo;
 }

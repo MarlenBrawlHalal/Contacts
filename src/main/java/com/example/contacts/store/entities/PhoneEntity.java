@@ -25,5 +25,5 @@ public class PhoneEntity {
     private String comment;
 
     @ManyToOne
-    private ContactInfoEntity contactInformation;
+    private ContactInfoEntity contactInfo;
 }

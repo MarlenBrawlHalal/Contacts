@@ -4,8 +4,14 @@ import com.example.contacts.api.dto.ContactDto;
 import com.example.contacts.api.exceptions.BadRequestException;
 import com.example.contacts.api.exceptions.NotFoundException;
 import com.example.contacts.api.factories.ContactDtoFactory;
+import com.example.contacts.store.entities.AddressEntity;
 import com.example.contacts.store.entities.ContactEntity;
+import com.example.contacts.store.entities.ContactInfoEntity;
+import com.example.contacts.store.entities.PhoneEntity;
+import com.example.contacts.store.repositories.AddressRepository;
+import com.example.contacts.store.repositories.ContactInfoRepository;
 import com.example.contacts.store.repositories.ContactRepository;
+import com.example.contacts.store.repositories.PhoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +29,6 @@ public class ContactController {
 
     @Autowired
     public ContactController(ContactRepository contactRepository, ContactDtoFactory contactDtoFactory) {
-
         this.contactRepository = contactRepository;
         this.contactDtoFactory = contactDtoFactory;
     }
@@ -67,37 +72,33 @@ public class ContactController {
     }
 
     @PostMapping("/contact/add")
-    public ContactDto createContact(@RequestParam String bin, @RequestParam String name) {
+    public ContactDto createContact(@RequestBody ContactEntity contactEntity) {
 
+        String bin = contactEntity.getBin();
         contactRepository.findByBin(bin)
                 .ifPresent(contact -> {
                     throw new BadRequestException(String.format("Contact with bin:'%s' already exists", bin));
                 });
 
-        ContactEntity savedContact = contactRepository.save(
-                ContactEntity.builder()
-                        .bin(bin)
-                        .name(name)
-                        .build()
-        );
+        contactEntity = contactRepository.save(contactEntity);
 
-        return contactDtoFactory.makeContactDto(savedContact);
+        return contactDtoFactory.makeContactDto(contactEntity);
     }
 
     @PatchMapping("/contact/{contact_id}")
-    public ContactDto updateContact(@PathVariable("contact_id") int id, @RequestParam String name) {
+    public ContactDto updateContact(@PathVariable("contact_id") int contact_id, @RequestParam String name) {
 
         if (name.trim().isEmpty()) {
             throw new BadRequestException("An empty name is prohibited");
         }
 
         ContactEntity contactEntity = contactRepository
-                .findById(id)
+                .findById(contact_id)
                 .orElseThrow(() ->
                         new NotFoundException(
                                 String.format(
                                         "Contact with id: '%d' doesn't exist",
-                                        id
+                                        contact_id
                                 )
                         )
                 );
@@ -110,15 +111,15 @@ public class ContactController {
     }
 
     @DeleteMapping("/contact/{contact_id}")
-    public ResponseEntity<Void> deleteContact(@PathVariable("id") int id) {
+    public ResponseEntity<Void> deleteContact(@PathVariable("contact_id") int contact_id) {
 
         ContactEntity contactEntity = contactRepository
-                .findById(id)
+                .findById(contact_id)
                 .orElseThrow(() ->
                         new NotFoundException(
                                 String.format(
                                         "Contact with id: '%d' doesn't exist",
-                                        id
+                                        contact_id
                                 )
                         )
                 );

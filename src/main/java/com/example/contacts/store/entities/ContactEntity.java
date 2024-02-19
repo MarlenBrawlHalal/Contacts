@@ -31,12 +31,12 @@ public class ContactEntity {
     private Instant updateDate = Instant.now();
 
     @Builder.Default
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
     private List<AddressEntity> addresses = new ArrayList<>();
 
     @Builder.Default
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "contact_id", referencedColumnName = "id")
-    private List<ContactInfoEntity> contactInformation = new ArrayList<>();
+    private List<ContactInfoEntity> contactInfo = new ArrayList<>();
 }

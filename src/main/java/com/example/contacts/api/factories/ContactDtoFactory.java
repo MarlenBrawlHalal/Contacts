@@ -34,9 +34,9 @@ public class ContactDtoFactory {
                             .map(addressDtoFactory::makeAddressDto)
                             .collect(Collectors.toList())
                 )
-                .contactInformation(
+                .contactInfo(
                         contactEntity
-                                .getContactInformation()
+                                .getContactInfo()
                                 .stream()
                                 .map(contactInfoDtoFactory::makeContactInfoDto)
                                 .collect(Collectors.toList())

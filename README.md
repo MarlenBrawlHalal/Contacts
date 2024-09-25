@@ -1,5 +1,9 @@
 This is a Spring Boot contact service for managing reference data.
 
+## Documentation of API
+
+You can visit the "http://localhost:8080/swagger-ui/index.html" to see the API documentation.
+
 ## Prerequisites
 
 - Java 21
